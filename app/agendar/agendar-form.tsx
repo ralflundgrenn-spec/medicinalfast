@@ -221,7 +221,9 @@ export function AgendarForm() {
           ) : (
             <div className="px-3 text-center text-xs text-ink-500">
               <DocCheck className="mx-auto mb-2 h-8 w-8 text-brand-500" />
-              QR de demonstração. Use o código copia-e-cola abaixo.
+              {cobranca.demo
+                ? "QR de demonstração. Use o código copia-e-cola abaixo."
+                : "Use o código copia-e-cola abaixo para pagar."}
             </div>
           )}
         </div>
@@ -354,6 +356,9 @@ export function AgendarForm() {
           {enviando ? "Gerando pagamento…" : "Ir para o pagamento"}
           {!enviando && <Bolt className="h-4 w-4" />}
         </button>
+        <p className="text-center text-sm font-semibold text-brand-700">
+          Garanta agora e receba acesso imediato após a compra.
+        </p>
         <p className="text-center text-xs text-ink-500">
           Pagamento seguro via PIX. Em emergências com risco de vida, ligue 192.
         </p>

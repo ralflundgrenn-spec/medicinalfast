@@ -98,7 +98,9 @@ export async function criarCobrancaPix(
     throw new Error(detalhe);
   }
 
-  const data = await res.json();
+  const json = await res.json();
+  // A resposta vem embrulhada: { success, data: { ... } }
+  const data = json.data ?? json;
   const pd = data.paymentData ?? data.pix ?? {};
 
   return {
@@ -134,6 +136,7 @@ export async function estadoCobranca(
     throw new Error(`BlackCat status ${res.status}: ${txt}`);
   }
 
-  const data = await res.json();
+  const json = await res.json();
+  const data = json.data ?? json;
   return { status: String(data.status ?? "PENDING").toUpperCase() };
 }
