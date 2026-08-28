@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { criarCobrancaPix, type FichaCliente } from "@/lib/blackcat";
+import { cpfValido } from "@/lib/cpf";
 
 function isEmail(v: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
@@ -20,11 +21,11 @@ export async function POST(request: Request) {
   const resumo = (body.resumo ?? "").trim();
 
   const erros: string[] = [];
-  if (nome.length < 2) erros.push("Indique o seu nome.");
+  if (nome.trim().split(/\s+/).length < 2) erros.push("Informe o nome completo.");
   if (!isEmail(email)) erros.push("Email inválido.");
   if (whatsapp.replace(/\D/g, "").length < 10) erros.push("WhatsApp inválido.");
-  if (cpf.replace(/\D/g, "").length !== 11) erros.push("CPF inválido.");
-  if (resumo.length < 3) erros.push("Descreva brevemente o que está sentindo.");
+  if (!cpfValido(cpf)) erros.push("CPF inválido.");
+  if (resumo.length < 5) erros.push("Descreva brevemente o que está sentindo.");
 
   if (erros.length > 0) {
     return NextResponse.json({ error: erros.join(" ") }, { status: 422 });

@@ -3,9 +3,28 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Bolt, Check, Clock, DocCheck, Shield } from "@/components/icons";
+import { cpfValido } from "@/lib/cpf";
 
 const CONSULTA_NOME = "Consulta médica com atestado";
 const CONSULTA_PRECO = "R$ 29,99";
+
+// Máscaras de entrada (formatam enquanto o cliente digita)
+function maskCPF(v: string) {
+  const d = v.replace(/\D/g, "").slice(0, 11);
+  if (d.length > 9)
+    return `${d.slice(0, 3)}.${d.slice(3, 6)}.${d.slice(6, 9)}-${d.slice(9)}`;
+  if (d.length > 6) return `${d.slice(0, 3)}.${d.slice(3, 6)}.${d.slice(6)}`;
+  if (d.length > 3) return `${d.slice(0, 3)}.${d.slice(3)}`;
+  return d;
+}
+
+function maskTel(v: string) {
+  const d = v.replace(/\D/g, "").slice(0, 11);
+  if (d.length > 10) return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+  if (d.length > 6) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+  if (d.length > 2) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+  return d;
+}
 
 type Passo = "ficha" | "pagamento" | "liberado";
 
@@ -44,6 +63,23 @@ export function AgendarForm() {
   async function irParaPagamento(e: React.FormEvent) {
     e.preventDefault();
     setErro(null);
+
+    // Validação no cliente — feedback imediato
+    const erros: string[] = [];
+    if (nome.trim().split(/\s+/).length < 2)
+      erros.push("Digite seu nome completo.");
+    if (whatsapp.replace(/\D/g, "").length < 10)
+      erros.push("WhatsApp inválido — use DDD + número.");
+    if (!cpfValido(cpf)) erros.push("CPF inválido.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))
+      erros.push("Email inválido.");
+    if (resumo.trim().length < 5)
+      erros.push("Conte um pouco melhor o que está sentindo.");
+    if (erros.length) {
+      setErro(erros.join(" "));
+      return;
+    }
+
     setEnviando(true);
     try {
       const res = await fetch("/api/pagamento/criar", {
@@ -248,9 +284,10 @@ export function AgendarForm() {
             <input
               id="whatsapp"
               value={whatsapp}
-              onChange={(e) => setWhatsapp(e.target.value)}
+              onChange={(e) => setWhatsapp(maskTel(e.target.value))}
               required
               inputMode="tel"
+              maxLength={16}
               placeholder="(11) 99999-9999"
               className="mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
             />
@@ -262,9 +299,10 @@ export function AgendarForm() {
             <input
               id="cpf"
               value={cpf}
-              onChange={(e) => setCpf(e.target.value)}
+              onChange={(e) => setCpf(maskCPF(e.target.value))}
               required
               inputMode="numeric"
+              maxLength={14}
               placeholder="000.000.000-00"
               className="mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
             />
