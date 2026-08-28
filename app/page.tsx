@@ -1,5 +1,19 @@
 import Link from "next/link";
-import { ArrowRight, Bolt, Check, DocCheck, LogoMark } from "@/components/icons";
+import {
+  ArrowRight,
+  Bolt,
+  Chat,
+  Check,
+  DocCheck,
+  LogoMark,
+} from "@/components/icons";
+
+// Número público para dúvidas (mesmo do médico), com DDI 55
+const WHATSAPP_DUVIDAS = "5511925478927";
+const MSG_DUVIDAS = "Olá! Queria saber mais sobre os serviços médicos.";
+const LINK_DUVIDAS = `https://wa.me/${WHATSAPP_DUVIDAS}?text=${encodeURIComponent(
+  MSG_DUVIDAS,
+)}`;
 
 export default function HomePage() {
   return (
@@ -53,6 +67,17 @@ export default function HomePage() {
               <strong className="text-ink-900">R$ 29,99</strong> · atestado
               incluído
             </p>
+
+            {/* Botão secundário — dúvidas no WhatsApp */}
+            <a
+              href={LINK_DUVIDAS}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn mt-4 border border-[#25D366] bg-white text-sm text-[#128C4A] hover:bg-[#25D366]/10 lg:text-base"
+            >
+              <Chat className="h-4 w-4 lg:h-5 lg:w-5" />
+              Tire suas dúvidas no WhatsApp
+            </a>
           </div>
 
           {/* Selo de confiança — bem visível */}
