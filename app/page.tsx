@@ -82,7 +82,10 @@ export default function HomePage() {
               Falar com médico agora
               <ArrowRight className="h-4 w-4 lg:h-5 lg:w-5" />
             </Link>
-            <p className="mt-3 text-sm text-ink-500 lg:text-base">
+            <p className="mt-3 text-sm font-semibold text-brand-700 lg:text-base">
+              Garanta agora e receba acesso imediato após a compra.
+            </p>
+            <p className="mt-1.5 text-sm text-ink-500 lg:text-base">
               Consulta única por{" "}
               <strong className="text-ink-900">R$ 29,99</strong> · atestado
               incluído

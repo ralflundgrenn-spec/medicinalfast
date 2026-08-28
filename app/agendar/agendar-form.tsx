@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { QRCodeSVG } from "qrcode.react";
 import { Bolt, Check, Clock, DocCheck, Shield } from "@/components/icons";
 import { cpfValido } from "@/lib/cpf";
 
@@ -211,7 +212,13 @@ export function AgendarForm() {
         )}
 
         <div className="mx-auto mt-6 flex h-56 w-56 items-center justify-center rounded-2xl border border-slate-200 bg-white p-3">
-          {cobranca.qrCodeBase64 ? (
+          {cobranca.copyPaste || cobranca.qrCode ? (
+            <QRCodeSVG
+              value={(cobranca.copyPaste || cobranca.qrCode) as string}
+              size={200}
+              level="M"
+            />
+          ) : cobranca.qrCodeBase64 ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={imgSrc(cobranca.qrCodeBase64)}
@@ -221,9 +228,7 @@ export function AgendarForm() {
           ) : (
             <div className="px-3 text-center text-xs text-ink-500">
               <DocCheck className="mx-auto mb-2 h-8 w-8 text-brand-500" />
-              {cobranca.demo
-                ? "QR de demonstração. Use o código copia-e-cola abaixo."
-                : "Use o código copia-e-cola abaixo para pagar."}
+              Use o código copia-e-cola abaixo para pagar.
             </div>
           )}
         </div>
