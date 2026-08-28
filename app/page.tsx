@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Bolt, Check, LogoMark } from "@/components/icons";
+import { ArrowRight, Bolt, Check, DocCheck, LogoMark } from "@/components/icons";
 
 export default function HomePage() {
   return (
@@ -52,13 +52,34 @@ export default function HomePage() {
             </p>
           </div>
 
+          {/* Selo de confiança — bem visível */}
+          <div className="mt-7 flex w-full max-w-md items-center gap-3 rounded-2xl border-2 border-brand-200 bg-white px-5 py-4 shadow-card">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-white">
+              <DocCheck className="h-7 w-7" />
+            </div>
+            <div className="text-left">
+              <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-extrabold text-ink-900">
+                Atestado 100% original e válido
+                <span className="badge bg-brand-100 text-brand-700">
+                  CRM verificado
+                </span>
+              </p>
+              <p className="mt-0.5 text-xs leading-relaxed text-ink-600">
+                Com <strong>carimbo</strong>, assinatura e número de{" "}
+                <strong>CRM de médicos reais</strong>, registrados no Conselho —
+                aceito pela empresa e RH.
+              </p>
+            </div>
+          </div>
+
           {/* Micro-provas numa linha */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-ink-700">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-ink-700">
             <span className="inline-flex items-center gap-1.5">
               <Check className="h-4 w-4 text-brand-600" /> 24h por dia
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Check className="h-4 w-4 text-brand-600" /> Atestado com validade
+              <Check className="h-4 w-4 text-brand-600" /> Médicos registrados no
+              CRM
             </span>
             <span className="inline-flex items-center gap-1.5">
               <Check className="h-4 w-4 text-brand-600" /> Pagamento seguro (PIX)
