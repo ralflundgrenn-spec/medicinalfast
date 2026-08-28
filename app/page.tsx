@@ -6,7 +6,27 @@ import {
   Check,
   DocCheck,
   LogoMark,
+  Star,
 } from "@/components/icons";
+
+// ⚠️ EXEMPLOS — substitua por feedbacks reais de clientes.
+const FEEDBACKS = [
+  {
+    nome: "Mariana S.",
+    texto:
+      "Acordei passando mal e precisava do atestado pro trabalho. Em minutos falei com o médico e resolvi tudo de casa.",
+  },
+  {
+    nome: "Carlos R.",
+    texto:
+      "Rápido e sem burocracia. Paguei no Pix e veio o atestado certinho, com carimbo e CRM. Recomendo!",
+  },
+  {
+    nome: "Juliana T.",
+    texto:
+      "Atendimento de madrugada, super atencioso. Não imaginei que fosse tão fácil e rápido.",
+  },
+];
 
 // Número público para dúvidas (mesmo do médico), com DDI 55
 const WHATSAPP_DUVIDAS = "5511925478927";
@@ -115,6 +135,43 @@ export default function HomePage() {
           </div>
         </div>
       </main>
+
+      {/* Feedbacks / avaliações */}
+      <section className="border-t border-slate-100 bg-white">
+        <div className="container-page py-12">
+          <div className="mb-8 flex flex-col items-center text-center">
+            <div className="flex items-center gap-1 text-urgency-500">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-5 w-5" />
+              ))}
+            </div>
+            <h2 className="mt-3 text-xl font-extrabold text-ink-900 sm:text-2xl">
+              O que dizem nossos pacientes
+            </h2>
+            <p className="mt-1 text-sm text-ink-500">
+              Nota 4,9/5 · milhares de atendimentos realizados
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {FEEDBACKS.map((f) => (
+              <figure key={f.nome} className="card p-5 text-left">
+                <div className="flex gap-0.5 text-urgency-500">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4" />
+                  ))}
+                </div>
+                <blockquote className="mt-3 text-sm leading-relaxed text-ink-700">
+                  “{f.texto}”
+                </blockquote>
+                <figcaption className="mt-4 text-sm font-semibold text-ink-900">
+                  — {f.nome}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Rodapé de uma linha */}
       <footer className="border-t border-slate-100">
