@@ -13,7 +13,11 @@ export async function POST(request: Request) {
   }
 
   try {
-    const evento = (payload as { event?: string })?.event ?? "desconhecido";
+    // A BlackCat envia o evento no cabeçalho X-Webhook-Event (e/ou no corpo).
+    const evento =
+      request.headers.get("x-webhook-event") ||
+      (payload as { event?: string })?.event ||
+      "desconhecido";
     console.log("[webhook blackcat]", evento, JSON.stringify(payload));
     // TODO: quando o Supabase estiver ligado, gravar aqui o pagamento confirmado.
   } catch (err) {
