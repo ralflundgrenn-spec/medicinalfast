@@ -44,8 +44,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, ...cobranca });
   } catch (err) {
     console.error("[/api/pagamento/criar] erro:", err);
+    const detalhe = err instanceof Error ? err.message : "erro desconhecido";
     return NextResponse.json(
-      { error: "Não foi possível gerar o pagamento. Tente novamente." },
+      { error: `Não foi possível gerar o pagamento. (${detalhe})` },
       { status: 502 },
     );
   }

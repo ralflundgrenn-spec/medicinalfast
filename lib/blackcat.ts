@@ -62,13 +62,17 @@ export async function criarCobrancaPix(
         title: "Consulta médica com atestado",
         unitPrice: VALOR_CENTAVOS,
         quantity: 1,
+        tangible: false,
       },
     ],
     customer: {
       name: ficha.nome,
       email: ficha.email,
       phone: apenasDigitos(ficha.whatsapp),
-      document: apenasDigitos(ficha.cpf),
+      document: {
+        number: apenasDigitos(ficha.cpf),
+        type: "cpf",
+      },
     },
     pix: { expiresInDays: 1 },
     ...(postbackUrl ? { postbackUrl } : {}),
@@ -84,8 +88,14 @@ export async function criarCobrancaPix(
   });
 
   if (!res.ok) {
-    const txt = await res.text().catch(() => "");
-    throw new Error(`BlackCat create-sale ${res.status}: ${txt}`);
+    let detalhe = `status ${res.status}`;
+    try {
+      const j = JSON.parse(await res.text());
+      detalhe = j.error || j.message || detalhe;
+    } catch {
+      /* corpo não-JSON */
+    }
+    throw new Error(detalhe);
   }
 
   const data = await res.json();
