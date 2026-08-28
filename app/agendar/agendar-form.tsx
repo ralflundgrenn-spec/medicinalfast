@@ -14,11 +14,9 @@ import {
 } from "@/components/icons";
 import type { CanalContacto, Urgencia } from "@/lib/types";
 
-const PLANOS: Record<string, string> = {
-  atestado_rapido: "Atestado Rápido — 24,90 €",
-  consulta_geral: "Consulta Geral — 34,90 €",
-  receita: "Receita / Renovação — 19,90 €",
-};
+// Consulta única
+const CONSULTA_NOME = "Consulta médica com atestado";
+const CONSULTA_PRECO = "29,99 €";
 
 const URGENCIAS: { id: Urgencia; label: string; hint: string }[] = [
   { id: "agora", label: "Agora", hint: "Falar com médico já" },
@@ -32,10 +30,7 @@ const CANAIS: { id: CanalContacto; label: string; Icon: typeof VideoCam }[] = [
   { id: "chat", label: "Chat", Icon: Chat },
 ];
 
-export function AgendarForm({ planoInicial }: { planoInicial: string }) {
-  const [tipoConsulta, setTipoConsulta] = useState(
-    PLANOS[planoInicial] ? planoInicial : "atestado_rapido",
-  );
+export function AgendarForm() {
   const [urgencia, setUrgencia] = useState<Urgencia>("agora");
   const [canal, setCanal] = useState<CanalContacto>("video");
   const [precisaAtestado, setPrecisaAtestado] = useState(true);
@@ -60,7 +55,7 @@ export function AgendarForm({ planoInicial }: { planoInicial: string }) {
           nome,
           telefone,
           email,
-          tipo_consulta: tipoConsulta,
+          tipo_consulta: "consulta_atestado",
           motivo,
           precisa_atestado: precisaAtestado,
           urgencia,
@@ -142,23 +137,15 @@ export function AgendarForm({ planoInicial }: { planoInicial: string }) {
           </div>
         </fieldset>
 
-        {/* Tipo de consulta */}
-        <div>
-          <label className="text-sm font-bold text-ink-900" htmlFor="tipo">
-            Tipo de consulta
-          </label>
-          <select
-            id="tipo"
-            value={tipoConsulta}
-            onChange={(e) => setTipoConsulta(e.target.value)}
-            className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink-900 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
-          >
-            {Object.entries(PLANOS).map(([id, label]) => (
-              <option key={id} value={id}>
-                {label}
-              </option>
-            ))}
-          </select>
+        {/* Consulta única */}
+        <div className="flex items-center justify-between rounded-xl border border-brand-200 bg-brand-50 px-4 py-3.5">
+          <div className="flex items-center gap-2 text-sm font-semibold text-brand-800">
+            <DocCheck className="h-4 w-4 text-brand-600" />
+            {CONSULTA_NOME}
+          </div>
+          <span className="text-base font-extrabold text-brand-700">
+            {CONSULTA_PRECO}
+          </span>
         </div>
 
         {/* Canal */}
@@ -291,14 +278,12 @@ export function AgendarForm({ planoInicial }: { planoInicial: string }) {
             <div className="flex justify-between">
               <dt className="text-ink-500">Consulta</dt>
               <dd className="text-right font-medium text-ink-900">
-                {PLANOS[tipoConsulta]?.split(" — ")[0]}
+                {CONSULTA_NOME}
               </dd>
             </div>
             <div className="flex justify-between">
               <dt className="text-ink-500">Valor</dt>
-              <dd className="font-bold text-ink-900">
-                {PLANOS[tipoConsulta]?.split(" — ")[1]}
-              </dd>
+              <dd className="font-bold text-ink-900">{CONSULTA_PRECO}</dd>
             </div>
             <div className="flex justify-between">
               <dt className="text-ink-500">Urgência</dt>

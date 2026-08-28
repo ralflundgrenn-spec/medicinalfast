@@ -9,13 +9,7 @@ export const metadata = {
     "Preencha os seus dados e fale com um médico online em minutos. Receba o seu atestado sem sair de casa.",
 };
 
-export default async function AgendarPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ plano?: string }>;
-}) {
-  const { plano } = await searchParams;
-
+export default function AgendarPage() {
   return (
     <>
       <header className="border-b border-slate-100">
@@ -46,7 +40,7 @@ export default async function AgendarPage({
             </div>
 
             <div className="mt-10 rounded-3xl bg-white p-6 shadow-card sm:p-10">
-              <AgendarForm planoInicial={plano ?? "atestado_rapido"} />
+              <AgendarForm />
             </div>
           </div>
         </div>
