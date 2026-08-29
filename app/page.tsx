@@ -1,44 +1,38 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  Bolt,
   Chat,
   Check,
   DocCheck,
   LogoMark,
-  Star,
 } from "@/components/icons";
 
-// ⚠️ EXEMPLOS — substitua por feedbacks reais de clientes.
-const FEEDBACKS = [
+const WHATSAPP_DUVIDAS = "5511925478927";
+const MSG_DUVIDAS = "Olá! Queria saber mais sobre a consulta médica online.";
+const LINK_DUVIDAS =
+  "https://wa.me/" +
+  WHATSAPP_DUVIDAS +
+  "?text=" +
+  encodeURIComponent(MSG_DUVIDAS);
+
+const ETAPAS = [
   {
-    nome: "Mariana S.",
-    texto:
-      "Acordei passando mal e precisava do atestado pro trabalho. Em minutos falei com o médico e resolvi tudo de casa.",
+    titulo: "Preencha seus dados",
+    texto: "Informe seus dados de contato e descreva brevemente seus sintomas.",
   },
   {
-    nome: "Carlos R.",
-    texto:
-      "Rápido e sem burocracia. Paguei no Pix e veio o atestado certinho, com carimbo e CRM. Recomendo!",
+    titulo: "Pague pela consulta",
+    texto: "O valor de R$ 29,99 corresponde exclusivamente ao atendimento médico online.",
   },
   {
-    nome: "Juliana T.",
-    texto:
-      "Atendimento de madrugada, super atencioso. Não imaginei que fosse tão fácil e rápido.",
+    titulo: "Converse com o médico",
+    texto: "O profissional fará a avaliação e definirá a orientação adequada para o seu caso.",
   },
 ];
-
-// Número público para dúvidas (mesmo do médico), com DDI 55
-const WHATSAPP_DUVIDAS = "5511925478927";
-const MSG_DUVIDAS = "Olá! Queria saber mais sobre os serviços médicos.";
-const LINK_DUVIDAS = `https://wa.me/${WHATSAPP_DUVIDAS}?text=${encodeURIComponent(
-  MSG_DUVIDAS,
-)}`;
 
 export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-brand-50/60 to-white">
-      {/* Header slim */}
       <header className="border-b border-slate-100/80">
         <div className="container-page flex h-16 items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -49,49 +43,45 @@ export default function HomePage() {
           </div>
           <span className="flex items-center gap-2 text-sm font-medium text-brand-700">
             <span className="live-dot" />
-            Médicos online agora
+            Atendimento médico online
           </span>
         </div>
       </header>
 
-      {/* Herói centrado — cabe num ecrã */}
       <main className="container-page flex flex-1 flex-col items-center justify-center py-12 text-center">
         <div className="animate-fade-up flex max-w-2xl flex-col items-center">
-          <div className="badge bg-urgency-100 text-urgency-600">
-            <Bolt className="h-3.5 w-3.5" />
-            Atestado em minutos, sem sair de casa
+          <div className="badge bg-brand-100 text-brand-700">
+            Consulta médica online
           </div>
 
           <h1 className="mt-5 text-4xl font-extrabold leading-[1.08] tracking-tight text-ink-900 sm:text-5xl lg:text-7xl">
-            Precisa de atestado?
+            Cuidado médico online,
             <br />
-            <span className="text-brand-600">Fale com um médico agora.</span>
+            <span className="text-brand-600">onde você estiver.</span>
           </h1>
 
-          <p className="mt-4 max-w-lg text-lg leading-relaxed text-ink-700 lg:max-w-xl lg:text-2xl">
-            Consulta médica online <strong>24 horas por dia</strong>. Fale com um
-            médico e receba seu atestado sem sair de casa.
+          <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink-700 lg:text-2xl">
+            Converse com um médico registrado no CRM. Após a avaliação, o
+            profissional orientará o atendimento e decidirá se existe indicação
+            clínica para a emissão de algum documento médico.
           </p>
 
-          {/* O único botão — centrado, no topo */}
           <div className="mt-8">
             <Link
               href="/agendar"
               className="btn-primary text-base lg:!px-8 lg:!py-4 lg:text-lg"
             >
-              Falar com médico agora
+              Iniciar consulta online
               <ArrowRight className="h-4 w-4 lg:h-5 lg:w-5" />
             </Link>
             <p className="mt-3 text-sm font-semibold text-brand-700 lg:text-base">
-              Garanta agora e receba acesso imediato após a compra.
+              Atendimento sujeito à avaliação médica individual.
             </p>
             <p className="mt-1.5 text-sm text-ink-500 lg:text-base">
-              Consulta única por{" "}
-              <strong className="text-ink-900">R$ 29,99</strong> · atestado
-              incluído
+              Consulta por <strong className="text-ink-900">R$ 29,99</strong>.
+              A emissão de documentos não é garantida.
             </p>
 
-            {/* Botão secundário — dúvidas no WhatsApp */}
             <a
               href={LINK_DUVIDAS}
               target="_blank"
@@ -103,85 +93,69 @@ export default function HomePage() {
             </a>
           </div>
 
-          {/* Selo de confiança — bem visível */}
-          <div className="mt-7 flex w-full max-w-md items-center gap-3 rounded-2xl border-2 border-brand-200 bg-white px-5 py-4 shadow-card lg:max-w-xl lg:gap-4 lg:px-6 lg:py-5">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-white lg:h-14 lg:w-14">
-              <DocCheck className="h-7 w-7 lg:h-8 lg:w-8" />
+          <div className="mt-7 flex w-full max-w-xl items-center gap-4 rounded-2xl border-2 border-brand-200 bg-white px-6 py-5 shadow-card">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-white">
+              <DocCheck className="h-8 w-8" />
             </div>
             <div className="text-left">
-              <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-extrabold text-ink-900 lg:text-lg">
-                Atestado 100% original e válido
-                <span className="badge bg-brand-100 text-brand-700">
-                  CRM verificado
-                </span>
+              <p className="text-lg font-extrabold text-ink-900">
+                Avaliação médica individual
               </p>
-              <p className="mt-0.5 text-xs leading-relaxed text-ink-600 lg:text-sm">
-                Com <strong>carimbo</strong>, assinatura e número de{" "}
-                <strong>CRM de médicos reais</strong>, registrados no Conselho —
-                aceito pela empresa e RH.
+              <p className="mt-1 text-sm leading-relaxed text-ink-600">
+                Declarações, receitas ou atestados são emitidos somente quando
+                clinicamente indicados, conforme a avaliação e a autonomia do
+                médico responsável.
               </p>
             </div>
           </div>
 
-          {/* Micro-provas numa linha */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-ink-700 lg:text-base">
             <span className="inline-flex items-center gap-1.5">
-              <Check className="h-4 w-4 text-brand-600" /> 24h por dia
+              <Check className="h-4 w-4 text-brand-600" /> Médicos registrados no CRM
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Check className="h-4 w-4 text-brand-600" /> Médicos registrados no
-              CRM
+              <Check className="h-4 w-4 text-brand-600" /> Atendimento remoto
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Check className="h-4 w-4 text-brand-600" /> Pagamento seguro (PIX)
+              <Check className="h-4 w-4 text-brand-600" /> Pagamento seguro via PIX
             </span>
           </div>
         </div>
       </main>
 
-      {/* Feedbacks / avaliações */}
       <section className="border-t border-slate-100 bg-white">
         <div className="container-page py-12">
-          <div className="mb-8 flex flex-col items-center text-center">
-            <div className="flex items-center gap-1 text-urgency-500">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-5 w-5" />
-              ))}
-            </div>
-            <h2 className="mt-3 text-xl font-extrabold text-ink-900 sm:text-2xl">
-              O que dizem nossos pacientes
+          <div className="mb-8 text-center">
+            <h2 className="text-2xl font-extrabold text-ink-900">
+              Como funciona a consulta
             </h2>
-            <p className="mt-1 text-sm text-ink-500">
-              Nota 4,9/5 · milhares de atendimentos realizados
+            <p className="mt-2 text-sm text-ink-600">
+              Um processo simples e transparente para iniciar seu atendimento.
             </p>
           </div>
-
           <div className="grid gap-4 md:grid-cols-3">
-            {FEEDBACKS.map((f) => (
-              <figure key={f.nome} className="card p-5 text-left">
-                <div className="flex gap-0.5 text-urgency-500">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4" />
-                  ))}
-                </div>
-                <blockquote className="mt-3 text-sm leading-relaxed text-ink-700">
-                  “{f.texto}”
-                </blockquote>
-                <figcaption className="mt-4 text-sm font-semibold text-ink-900">
-                  — {f.nome}
-                </figcaption>
-              </figure>
+            {ETAPAS.map((etapa, index) => (
+              <div key={etapa.titulo} className="card p-5 text-left">
+                <span className="text-sm font-bold text-brand-600">
+                  Etapa {index + 1}
+                </span>
+                <h3 className="mt-2 font-extrabold text-ink-900">
+                  {etapa.titulo}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-600">
+                  {etapa.texto}
+                </p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Rodapé de uma linha */}
       <footer className="border-t border-slate-100">
-        <div className="container-page flex h-14 items-center justify-center text-center text-xs text-ink-500">
+        <div className="container-page flex min-h-16 items-center justify-center py-3 text-center text-xs text-ink-500">
           Não substitui urgências — em caso de risco de vida, ligue&nbsp;
-          <span className="font-semibold text-ink-700">192</span>. ©{" "}
-          {new Date().getFullYear()} Atestado Já.
+          <span className="font-semibold text-ink-700">192</span>. Documentos
+          médicos dependem de indicação clínica. © {new Date().getFullYear()} Atestado Já.
         </div>
       </footer>
     </div>
