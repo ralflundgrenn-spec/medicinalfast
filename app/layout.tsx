@@ -10,23 +10,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Atestado Já — Consulta médica online 24h com atestado rápido",
+  title: "Atestado Já — Consulta médica online",
   description:
-    "Fale com um médico online em minutos, 24 horas por dia. Receba o seu atestado médico sem sair de casa, quando clinicamente justificado. Rápido, seguro e sigiloso.",
+    "Consulta médica online com profissionais registrados no CRM. Documentos médicos são emitidos somente quando clinicamente indicados.",
   keywords: [
-    "atestado médico online",
     "consulta médica online",
-    "médico 24 horas",
-    "atestado rápido",
+    "médico online",
     "telemedicina",
-    "baixa médica",
+    "atendimento médico online",
   ],
   openGraph: {
-    title: "Atestado Já — Consulta médica online 24h com atestado rápido",
+    title: "Atestado Já — Consulta médica online",
     description:
-      "Fale com um médico online em minutos, 24h por dia, e receba o seu atestado sem sair de casa.",
+      "Converse com um médico online. A orientação e qualquer documento dependem da avaliação clínica.",
     type: "website",
-    locale: "pt_PT",
+    locale: "pt_BR",
   },
 };
 
@@ -36,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt" className={inter.variable}>
+    <html lang="pt-BR" className={inter.variable}>
       <body>
         {children}
 
@@ -46,12 +44,7 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
         <Script id="google-ads-gtag" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-18415993757');
-          `}
+          {"window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-18415993757');"}
         </Script>
       </body>
     </html>
