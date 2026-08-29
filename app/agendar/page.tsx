@@ -4,9 +4,9 @@ import { LogoMark } from "@/components/icons";
 import { AgendarForm } from "./agendar-form";
 
 export const metadata = {
-  title: "Iniciar consulta — Atestado Já",
+  title: "Iniciar consulta médica online — Atestado Já",
   description:
-    "Preencha os seus dados e fale com um médico online em minutos. Receba o seu atestado sem sair de casa.",
+    "Preencha seus dados para iniciar uma consulta médica online. A emissão de documentos depende de indicação clínica.",
 };
 
 export default function AgendarPage() {
@@ -22,7 +22,7 @@ export default function AgendarPage() {
           </Link>
           <span className="flex items-center gap-2 text-sm font-medium text-brand-700">
             <span className="live-dot" />
-            Médicos online agora
+            Atendimento médico online
           </span>
         </div>
       </header>
@@ -32,10 +32,12 @@ export default function AgendarPage() {
           <div className="mx-auto max-w-4xl">
             <div className="text-center">
               <h1 className="text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">
-                Fale com um médico agora
+                Inicie sua consulta médica online
               </h1>
               <p className="mt-3 text-ink-700">
-                Menos de 2 minutos para começar. Sem sair de casa.
+                Preencha seus dados para começar. A emissão de atestados,
+                receitas ou declarações não é garantida e depende da avaliação
+                clínica do médico.
               </p>
             </div>
 
