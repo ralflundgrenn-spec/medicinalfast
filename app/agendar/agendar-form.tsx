@@ -135,6 +135,23 @@ export function AgendarForm() {
     };
   }, [passo, cobranca]);
 
+  // Dispara a conversão do Google Ads quando o pagamento é confirmado
+  useEffect(() => {
+    if (passo !== "liberado") return;
+    const w = window as unknown as {
+      gtag?: (
+        command: string,
+        event: string,
+        params: Record<string, unknown>,
+      ) => void;
+    };
+    w.gtag?.("event", "conversion", {
+      send_to: "AW-18415993757/bYJPCIj-3ekcEJ2Ht81E",
+      value: 1.0,
+      currency: "BRL",
+    });
+  }, [passo]);
+
   async function copiar() {
     if (!cobranca?.copyPaste) return;
     try {
