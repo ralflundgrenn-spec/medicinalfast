@@ -6,7 +6,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { Bolt, Check, Clock, DocCheck, Shield } from "@/components/icons";
 import { cpfValido } from "@/lib/cpf";
 
-const CONSULTA_NOME = "Consulta médica com atestado";
+const CONSULTA_NOME = "Consulta médica online";
 const CONSULTA_PRECO = "R$ 29,99";
 
 // Máscaras de entrada (formatam enquanto o cliente digita)
@@ -185,8 +185,10 @@ export function AgendarForm() {
           Pagamento confirmado! ✅
         </h2>
         <p className="mt-3 text-ink-700">
-          Fale já com o médico no WhatsApp. A sua ficha vai{" "}
-          <strong>preenchida</strong> — é só carregar em enviar.
+          Entre em contato com o médico pelo WhatsApp. A sua ficha vai{" "}
+          <strong>preenchida</strong> — é só carregar em enviar. A emissão de
+          documentos médicos depende da avaliação clínica e pode ser recusada
+          pelo profissional.
         </p>
 
         <a
@@ -275,8 +277,9 @@ export function AgendarForm() {
           À espera do pagamento…
         </div>
         <p className="mt-2 text-xs text-ink-500">
-          Assim que o PIX for confirmado, o WhatsApp do médico é liberado
-          automaticamente nesta página.
+          Assim que o PIX for confirmado, o contato para iniciar a consulta
+          médica será liberado nesta página. O pagamento não garante a emissão
+          de atestado, receita ou qualquer outro documento.
         </p>
       </div>
     );
@@ -379,7 +382,8 @@ export function AgendarForm() {
           {!enviando && <Bolt className="h-4 w-4" />}
         </button>
         <p className="text-center text-sm font-semibold text-brand-700">
-          Garanta agora e receba acesso imediato após a compra.
+          O valor corresponde exclusivamente à consulta médica online.
+          Documentos médicos não são garantidos.
         </p>
         <p className="text-center text-xs text-ink-500">
           Pagamento seguro via PIX. Em emergências com risco de vida, ligue 192.
@@ -411,8 +415,8 @@ export function AgendarForm() {
               <Shield className="h-4 w-4 text-brand-600" /> Pagamento seguro
             </p>
             <p className="flex items-center gap-2">
-              <Clock className="h-4 w-4 text-brand-600" /> WhatsApp liberado na
-              hora
+              <Clock className="h-4 w-4 text-brand-600" /> Acesso ao médico após
+              a confirmação do pagamento
             </p>
             <p className="flex items-center gap-2">
               <Check className="h-4 w-4 text-brand-600" /> Ficha vai preenchida ao
