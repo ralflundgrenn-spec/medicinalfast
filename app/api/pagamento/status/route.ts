@@ -16,10 +16,8 @@ export async function GET(request: Request) {
     return NextResponse.json({
       status,
       pago,
-      // Só devolve o contacto do médico DEPOIS do pagamento confirmado.
-      whatsappMedico: pago
-        ? process.env.DOCTOR_WHATSAPP || "5511999999999"
-        : null,
+      // Só devolve o contato do médico depois do pagamento confirmado.
+      whatsappMedico: pago ? "5511925478927" : null,
     });
   } catch (err) {
     console.error("[/api/pagamento/status] erro:", err);
